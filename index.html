@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.addEventListener("load", function () {
+        const fileInput = document.getElementById("file-input");
+        const show = document.getElementById("files");
+        fileInput.addEventListener("change", function () {
+          for (const file of fileInput.files) {
+            show.innerHTML += "<li>" + file.name + "</li>";
+          }
+        });
+        document.getElementById("backgroundColorChange").onclick = function () {
+          let isDarkMode = window.localStorage.getItem("black");
+          if (isDarkMode == null) {
+            document.body.style.backgroundColor = "black";
+            document.body.style.color = "white";
+            window.localStorage.getItem("black");
+            window.localStorage.removeItem("black");
+            window.localStorage.setItem("black", 0);
+            return;
+          }
+          if (isDarkMode == 0) {
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
+            window.localStorage.removeItem("black");
+            return;
+          }
+        };
+      });
+    </script>
+  </head>
+  <body>
+    <input type="file" multiple id="file-input" />
+    <a id="files"></a>
+    <br />
+    <button id="backgroundColorChange">다크모드 끄기/켜기</button>
+  </body>
+</html>
